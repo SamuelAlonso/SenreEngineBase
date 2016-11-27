@@ -1,1 +1,3 @@
-# SenreEngineBase
+SenreEngineBase
+
+The base of my Graphics Engine, Senre. Currently in Update...
