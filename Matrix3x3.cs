@@ -59,5 +59,9 @@
         {
             return new Matrix3x3(a.M1 / b.M1, a.M2 / b.M2, a.M3 / b.M3, a.M4 / b.M4, a.M5 / b.M5, a.M6 / b.M6, a.M7 / b.M7, a.M8 / b.M8, a.M9 / b.M9);
         }
+        public double[] ToDoubleArray(Matrix3x3 m)
+        {
+            return new double[9] {m.M1, m.M2, m.M3, m.M4, m.M5, m.M6, m.M7, m.M8, m.M9 };
+        }
     }
 }
