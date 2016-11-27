@@ -12,6 +12,11 @@ namespace SenreEngine
             this.x = x;
             this.y = y;
         }
+        public Vector2(Vector2 Other)
+        {
+            this.x = Other.x;
+            this.y = Other.y;
+        }
         public static Vector2 Empty
         {
             get
@@ -205,41 +210,49 @@ namespace SenreEngine
         }
         public static Vector2 Max(Vector2 a, Vector2 b)
         {
-            if (a.x > a.y && a.x > b.x && a.x > b.y)
+            float newX = 0;
+            float newY = 0;
+
+            if (a.x > b.x)
             {
-                return new Vector2(a.x, a.x);
-            }
-            else if (a.y > a.x && a.y > b.x && a.y > b.y)
-            {
-                return new Vector2(a.y, a.y);
-            }
-            else if (b.x > a.x && b.x > a.y && a.x > b.y)
-            {
-                return new Vector2(b.x, b.x);
+                newX = a.x;
             }
             else
             {
-                return new Vector2(b.y, b.y);
+                newX = b.x;
             }
+            if (a.y > b.y)
+            {
+                newY = a.y;
+            }
+            else
+            {
+                newY = b.y;
+            }
+            return new Vector2(newX, newY);
         }
         public static Vector2 Min(Vector2 a, Vector2 b)
         {
-            if (a.x < a.y && a.x < b.x && a.x < b.y)
+            float newX = 0;
+            float newY = 0;
+
+            if (a.x < b.x)
             {
-                return new Vector2(a.x, a.x);
-            }
-            else if (a.y < a.x && a.y < b.x && a.y < b.y)
-            {
-                return new Vector2(a.y, a.y);
-            }
-            else if (b.x < a.x && b.x < a.y && a.x < b.y)
-            {
-                return new Vector2(b.x, b.x);
+                newX = a.x;
             }
             else
             {
-                return new Vector2(b.y, b.y);
+                newX = b.x;
             }
+            if (a.y < b.y)
+            {
+                newY = a.y;
+            }
+            else
+            {
+                newY = b.y;
+            }
+            return new Vector2(newX, newY);
         }
         public static Vector2 Rotate(Vector2 vec, float angle)
         {
@@ -256,7 +269,6 @@ namespace SenreEngine
         {
             return new Vector2(a.x, a.y);
         }
-
     }
 #pragma warning restore 0660, 0661
 }
