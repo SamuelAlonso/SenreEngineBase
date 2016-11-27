@@ -1,5 +1,3 @@
-﻿using System;
-
 namespace SenreEngine
 {
     public struct Matrix4x4
@@ -85,6 +83,5 @@ namespace SenreEngine
         {
             return new double[16] {a.M1, a.M2, a.M3, a.M4, a.M5, a.M6, a.M7, a.M8, a.M9, a.M10, a.M11, a.M12, a.M13, a.M14, a.M15, a.M16};
         }
-
     }
 }
