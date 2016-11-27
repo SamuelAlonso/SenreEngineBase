@@ -13,6 +13,12 @@ namespace SenreEngine
             this.y = y;
             this.z = z;
         }
+        public Vector3(Vector3 Other)
+        {
+            this.x = Other.x;
+            this.y = Other.y;
+            this.z = Other.z;
+        }
         public static Vector3 Empty
         {
             get
@@ -206,6 +212,141 @@ namespace SenreEngine
             {
                 return a;
             }
+        }
+        public static Vector3 Max(Vector3 a, Vector3 b)
+        {
+            float newX = 0;
+            float newY = 0;
+            float newZ = 0;
+
+            if (a.x > b.x)
+            {
+                newX = a.x;
+            }
+            else
+            {
+                newX = b.x;
+            }
+            if (a.y > b.y)
+            {
+                newY = a.y;
+            }
+            else
+            {
+                newY = b.y;
+            }
+            if(a.z > b.z)
+            {
+                newZ = a.z;
+            }
+            else
+            {
+                newZ = b.z;
+            }
+            return new Vector3(newX, newY, newZ);
+        }
+        public static Vector3 Min(Vector3 a, Vector3 b)
+        {
+            float newX = 0;
+            float newY = 0;
+            float newZ = 0;
+
+            if (a.x < b.x)
+            {
+                newX = a.x;
+            }
+            else
+            {
+                newX = b.x;
+            }
+            if (a.y < b.y)
+            {
+                newY = a.y;
+            }
+            else
+            {
+                newY = b.y;
+            }
+            if (a.z < b.z)
+            {
+                newZ = a.z;
+            }
+            else
+            {
+                newZ = b.z;
+            }
+            return new Vector3(newX, newY, newZ);
+        }
+        public static float Normalize(Vector3 a)
+        {
+            return (float)Math.Sqrt(a.x * a.x + a.y * a.y + a.z * a.z);
+        }
+        public static float Dot(Vector3 a, Vector3 b)
+        {
+            return a.x * b.x + a.y * b.y + a.z * b.z;
+        }
+        public static float Distance(Vector3 a, Vector3 b)
+        {
+            return Normalize(a) - Normalize(b);
+        }
+        public static float Angle(Vector3 a, Vector3 b)
+        {
+            return (float)Math.Cos(Dot(a, b) / (Normalize(a) * Normalize(b)));
+        }
+        public static Vector3 Cross(Vector3 a, Vector3 b)
+        {
+            return new Vector3(a.y * b.z - a.z * b.y, a.z * b.x - a.x * b.z, a.x * b.y - a.y * b.x);
+        }
+        public static Vector3 Lerp(Vector3 a, Vector3 b, float time_to_interpolate)
+        {
+            return a + time_to_interpolate * (b - a);
+        }
+        public static Vector3 Slerp(Vector3 a, Vector3 b, float time_to_interpolate)
+        {
+            float dot = Dot(a, b);
+            MathUtilities.Clamp(ref dot, -1, 1);
+            float theta = (float)Math.Acos(dot) * time_to_interpolate;
+            float Relative = Normalize(b - a * dot);
+            return new Vector3((a.x * (float)Math.Cos(theta)) + (Relative * (float)Math.Sin(theta)), (a.y * (float)Math.Cos(theta)) + (Relative * (float)Math.Sin(theta)), (a.z * (float)Math.Cos(theta)) + (Relative * (float)Math.Sin(theta)));
+        }
+        public static bool Orthogonals(Vector3 a, Vector3 b)
+        {
+            if(Dot(a, b) == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public static bool Orthonormals(Vector3 a, Vector3 b)
+        {
+            if(Dot(a, b) == 0 && Normalize(a) == Normalize(b) && Normalize(a) == 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public static Vector3 ProjectOnVector(Vector3 a, Vector3 b)
+        {
+            return new Vector3((a * b)/(b * b) * b);
+        }
+        public static Vector3 ProjectOnScalar(Vector3 a, Vector3 b)
+        {
+            return new Vector3((a * b) / Absolute(b));
+        }
+        public static Vector3 Reflect(Vector3 a, Vector3 b)
+        {
+            return new Vector3(a - 2 * (a * b) * b);
+        }
+        public static Vector3 FindOrthogonal(Vector3 a, Vector3 b)
+        {
+            Vector3 cross = Cross(a, b);
+            return new Vector3(cross / Normalize(cross));
         }
     }
 #pragma warning restore 0660, 0661
