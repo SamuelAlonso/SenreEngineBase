@@ -2,6 +2,17 @@
 {
     public class MathUtilities
     {
+        public static void Clamp(ref float number, float min, float max)
+        {
+            if(number < min)
+            {
+                number = min;
+            }
+            else
+            {
+                number = max;
+            }
+        }
         public static float Max(float MaxValue, float Variable)
         {
             if(Variable > MaxValue)
